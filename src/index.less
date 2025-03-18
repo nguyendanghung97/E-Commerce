@@ -1,0 +1,92 @@
+
+// @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sub-dropdown {
+    &:hover .sub-dropdown-content {
+      @apply visible opacity-100;
+    }
+}
+
+.hover-increase-width {
+  &:hover .hover-increase-width-content {
+    @apply w-3;
+  }
+  &:hover .hover-translate {
+    @apply ml-2;
+  }
+}
+
+.mySwiper .swiper-slide-prev {
+  @apply blur-sm;
+}
+.oke2 .swiper-slide-thumb-active {
+  @apply !border !border-black;
+}
+
+.swiper-select .swiper-slide-thumb-active {
+  @apply !border-none !opacity-100;
+}
+.swiper-scrollbar-drag {
+  @apply !bg-black;
+}
+.swiper-pagination-bullet {
+  @apply !w-9 !h-9 md:!h-10 md:!w-10 aspect-square  !rounded-lg !bg-transparent !flex justify-center items-center;
+}
+.swiper-pagination-bullet-active {
+  @apply !bg-black/5;
+}
+// glightbox
+.goverlay {
+  @apply !bg-black/70;
+}
+
+
+
+@layer utilities {
+  .paused:hover>.brands {
+    animation-play-state: paused;
+  }
+  
+}
+
+.hamburger { @apply flex self-center flex-col justify-between w-6 h-6 pt-1 pb-1;
+  span { @apply self-end w-full bg-black transition-all duration-300 ease-in-out ~'h-0.5'; }
+  .meat { @apply ~'w-10/12' transition-all duration-150 ease-in-out; }
+  .bottom-bun { @apply ~'w-7/12'; }
+  &:hover span { @apply w-full; }
+  &.active {
+    .top-bun { @apply w-full -rotate-45 ~'translate-y-[0.4rem]'; }
+    .bottom-bun { @apply w-full rotate-45 ~'-translate-y-[0.5rem]'; }
+    .meat { @apply w-0; }
+    &:hover { @apply transition-transform duration-300 hover:rotate-90 ease-in-out; }
+  }
+  &:not(.active):hover {
+    .top-bun { @apply animate-burger-hover-2; }
+    .meat { @apply animate-burger-hover-4; }
+    .bottom-bun { @apply animate-burger-hover-6; }
+  }
+}
+
+// Colors filter
+.color-active {
+  & .icon {
+    @apply !visible !opacity-100;
+  }
+}
+.size-active {
+  @apply !bg-black !text-white;
+}
+
+// Input range price
+// Nút tròn
+input[type=range]::-webkit-slider-thumb{
+  @apply pointer-events-auto appearance-none h-5 w-5 rounded-full bg-black;
+}
+
+input[type=range]::-moz-range-thumb {
+  @apply appearance-none h-5 w-5 bg-black;
+}
