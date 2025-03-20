@@ -25,11 +25,11 @@ setupMenuMobile(document.getElementsByClassName('handle-search'));
 setupMenuMobile(document.getElementsByClassName('handle-filter'));
 
 // GLightboxjs 3
-const glightbox:any = GLightbox({
-    // touchNavigation: false,
-    // loop: false,
-    // autoplayVideos: true,  
-});
+// const glightbox:any = GLightbox({
+//     // touchNavigation: false,
+//     // loop: false,
+//     // autoplayVideos: true,  
+// });
 // glightbox.init();
 // Appearjs
 // Nếu appear.js không có kiểu định nghĩa sẵn, bạn có thể khai báo nó như sau:
