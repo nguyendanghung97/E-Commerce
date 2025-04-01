@@ -110,28 +110,22 @@ export const setupSwiper = () => {
   });
 
 
-  let swiper = new Swiper(".oke2", {
-    // spaceBetween: 12,
-    direction: 'vertical',
-    slidesPerView: 3,
-    freeMode: true,
-    watchSlidesProgress: true,
-  });
   new Swiper(".oke1", {
     direction: 'vertical',
-    // scrollbar: {
-    //   el: ".swiper-scrollbar",
-    //   // hide: true,
+    // spaceBetween: 30,
+    // navigation: {
+    //     nextEl: ".swiper-button-next",
+    //     prevEl: ".swiper-button-prev",
     // },
-    spaceBetween: 30,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
     thumbs: {
-      swiper: swiper,
+        swiper: new Swiper(".oke2", {
+            direction: 'vertical',
+            slidesPerView: 3,
+            freeMode: true,
+            watchSlidesProgress: true,
+        }),
     },
-  });
+});
 
   let swiper2 = new Swiper(".swiper-select", {
     slidesPerView: 3,
