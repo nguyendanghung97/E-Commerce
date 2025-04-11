@@ -1,7 +1,8 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} */
 export default {
-   content: ['./*.html', './src/**/*.{js,ts,jsx,tsx}'],
+   // /public/**/*.html: để tailwindcss có thế quét các lớp css
+   content: ['./*.html', './src/**/*.{js,ts,jsx,tsx}', './public/**/*.html'],
    theme: {
       fontFamily: {
          sans: ['Satoshi', ...defaultTheme.fontFamily.sans],

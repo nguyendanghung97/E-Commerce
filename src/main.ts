@@ -1,3 +1,6 @@
+// main.ts
+import './index.less'; // Import LESS trực tiếp mà không cần folder styles
+
 import { setupSwiper } from './swiper';
 import { handleBars } from './handlebars';
 import { dataHandleBars, generalColors, popularSizes, producDefaulttWithStars } from './dataHandleBars';
@@ -66,7 +69,7 @@ Gsap('.gsap-collapse', '.arrow-up', 'timeCollapse');
 export function loadHeader() {
    const headerElement = document.getElementById('header');
 
-   fetch('header.html')
+   fetch('/header.html')
       .then((response) => response.text())
       .then((data) => {
          if (headerElement) {
@@ -124,7 +127,7 @@ window.onload = function () {
    const footerElement = document.getElementById('footer');
 
    // Tải nội dung footer
-   fetch('footer.html')
+   fetch('/footer.html')
       .then((response) => response.text())
       .then((data) => {
          if (footerElement) {
@@ -207,25 +210,23 @@ document.addEventListener('DOMContentLoaded', () => {
    let quantity = 1;
 
    if (increaseBtn) {
-      console.log('khfkshfshk');
       increaseBtn.addEventListener('click', () => {
-         console.log('kdhkhdkad');
          quantity++;
-         console.log('quantity', quantity);
          Array.from(quantityEls).forEach((el) => {
             el.textContent = String(quantity);
          });
       });
    }
-   decreaseBtn!.addEventListener('click', () => {
-      if (quantity > 1) {
-         quantity--;
-         Array.from(quantityEls).forEach((el) => {
-            el.textContent = String(quantity);
-         });
-      }
-   });
-   console.log('quantity', quantity);
+   if (decreaseBtn) {
+      decreaseBtn.addEventListener('click', () => {
+         if (quantity > 1) {
+            quantity--;
+            Array.from(quantityEls).forEach((el) => {
+               el.textContent = String(quantity);
+            });
+         }
+      });
+   }
 });
 
 // Chỉ chạy khi đang ở /product-detail
