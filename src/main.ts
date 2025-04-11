@@ -68,7 +68,6 @@ Gsap('.gsap-collapse', '.arrow-up', 'timeCollapse');
 
 export function loadHeader() {
    const headerElement = document.getElementById('header');
-
    fetch('/header.html')
       .then((response) => response.text())
       .then((data) => {

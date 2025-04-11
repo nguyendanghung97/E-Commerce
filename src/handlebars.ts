@@ -1,4 +1,4 @@
-export const handleBars = (idTemplate: string, className: string, data: Record<string, any>, callback?: () => void) => {
+export const handleBars = (idTemplate: string, className: string, data: Record<string, any>) => {
    const temp = document.getElementById(idTemplate);
    if (temp) {
       // Đăng ký helper tùy chỉnh để giới hạn số phần tử
@@ -34,8 +34,5 @@ export const handleBars = (idTemplate: string, className: string, data: Record<s
       elements.forEach(function (element) {
          element.innerHTML = template(data);
       });
-
-      // Gọi callback nếu có
-      callback?.();
    }
 };

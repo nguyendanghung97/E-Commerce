@@ -24,7 +24,14 @@ export const setupMenuMobile = (collectionElementsByClass: HTMLCollectionOf<Elem
          // Handle filter
          if (el.classList.contains('handle-filter')) {
             toggleClassList(document.getElementById('bg-filter'), ['opacity-0', 'opacity-50', 'invisible']);
-            toggleClassList(document.getElementById('filter'), ['invisible', 'opacity-0', 'top-full', 'top-48']);
+            toggleClassList(document.getElementById('filter'), [
+               'invisible',
+               'opacity-0',
+               'top-full',
+               'top-36',
+               'sm:-left-full',
+               'sm:left-0',
+            ]);
          }
       }),
    );
