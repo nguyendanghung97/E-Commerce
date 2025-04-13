@@ -159,17 +159,19 @@ handleBars('template-swiper-category', '.swiper-category', {
    handleBars(`template-${nameCollection}`, `.${nameCollection}`, { items: data });
 });
 
-const handleClickGetId = (el: HTMLElement): void => {
-   const id = parseInt(el.dataset.id!);
-   const productActive = dataHandleBars.products.find((p) => p.id === id);
+// function scrollToTarget() {
+//    const targetId = window.location.hash.slice(1); // Lấy phần sau dấu #
 
-   if (!productActive) return;
-
-   // ✅ Lưu itemActive vào localStorage
-   localStorage.setItem('productActive', JSON.stringify(productActive));
-};
-// Gắn vào window để dùng trong HTML
-(window as any).globalFn = { handleClickGetId };
+//    if (targetId) {
+//       const el = document.getElementById(targetId);
+//       if (el) {
+//          el.scrollIntoView({
+//             behavior: 'smooth',
+//             block: 'center', // Đảm bảo phần tử được scroll đến giữa màn hình
+//          });
+//       }
+//    }
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
    const productActiveStr = localStorage.getItem('productActive');
@@ -226,6 +228,13 @@ document.addEventListener('DOMContentLoaded', () => {
          }
       });
    }
+
+   // scrollToTarget();
+});
+
+// Theo dõi thay đổi của hash khi người dùng click các liên kết
+window.addEventListener('hashchange', () => {
+   // scrollToTarget();
 });
 
 // Chỉ chạy khi đang ở /product-detail
@@ -260,36 +269,33 @@ new LazyLoad({
 // Vị trí cuối cùng của cuộn xuống
 let lastScrollTop = 0;
 document.addEventListener('scroll', () => {
-   {
-      let pos = 0;
-      let scrollProgress = document.getElementById('backToTop');
-      // Lấy vị trí cuộn hiện tại
-      pos = document.documentElement.scrollTop;
-      // Chiều cao của cả trang web
-      let calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      // Lấy phần trăm nguyên
-      let scrollValue = Math.round((pos * 100) / calcHeight);
+   const scrollProgress = document.getElementById('backToTop');
 
-      if (pos > lastScrollTop || pos == 0) {
-         scrollProgress!.style.display = 'none';
-      } else {
-         // Người dùng đang cuộn lên st < lastScrollTop
-         scrollProgress!.style.display = 'flex';
-      }
-      // Cập nhật vị trí cuộn trước đó
-      lastScrollTop = pos;
+   if (!scrollProgress) return; // Kiểm tra ngay nếu phần tử không tồn tại
 
-      // if (pos > 96) {
-      //     scrollProgress!.style.display = 'flex';
-      // } else {
-      //     scrollProgress!.style.display = 'none';
-      // }
+   const currentScrollPos = document.documentElement.scrollTop;
+   const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
-      scrollProgress!.style.background = `conic-gradient(black ${scrollValue}%, #d7d7d7 ${scrollValue}% )`;
-      scrollProgress?.addEventListener('click', () => {
-         window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+   // Tính toán phần trăm cuộn
+   const scrollValue = Math.round((currentScrollPos * 100) / scrollHeight);
+
+   // Chỉ thay đổi hiển thị khi cần thiết (không làm lại mỗi lần cuộn)
+   if (currentScrollPos > lastScrollTop || currentScrollPos === 0) {
+      scrollProgress.style.display = 'none';
+   } else {
+      scrollProgress.style.display = 'flex';
    }
+
+   // Cập nhật lại lastScrollTop
+   lastScrollTop = currentScrollPos;
+
+   // Thay đổi màu sắc của thanh tiến trình
+   scrollProgress.style.background = `conic-gradient(black ${scrollValue}%, #d7d7d7 ${scrollValue}%)`;
+
+   // Sự kiện click lên để cuộn về đầu trang
+   scrollProgress.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+   });
 });
 
 // Smooth
@@ -345,3 +351,21 @@ Array.from(rangeInput).forEach((input) => {
       }
    });
 });
+
+const handleClickGetId = (el: HTMLElement): void => {
+   const id = parseInt(el.dataset.id!);
+   const productActive = dataHandleBars.products.find((p) => p.id === id);
+
+   if (!productActive) return;
+
+   // ✅ Lưu itemActive vào localStorage
+   localStorage.setItem('productActive', JSON.stringify(productActive));
+};
+
+const stopPagination = (e: Event): void => {
+   e.preventDefault();
+   e.stopPropagation();
+   // console.log('Pagination stopped');
+};
+// Gắn vào window để dùng trong HTML
+(window as any).globalFn = { handleClickGetId, stopPagination };

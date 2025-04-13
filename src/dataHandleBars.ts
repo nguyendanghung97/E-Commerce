@@ -386,7 +386,11 @@ export const dataHandleBars = {
          ],
       },
    ],
-   nav: [{ a: 'On Sale' }, { a: 'New Arrivals' }, { a: 'Brands' }],
+   nav: [
+      { a: 'On Sale', href: '/#topSelling' },
+      { a: 'New Arrivals', href: '/#newArrivals' },
+      { a: 'Brands', href: '/#brands' },
+   ],
    Shop: [
       { span: 'Men', collection: [{ span: 'T-shirts' }, { span: 'Polo' }, { span: 'Jeans' }] },
       { span: 'Women', collection: [{ span: 'T-shirts' }, { span: 'Polo' }, { span: 'Jeans' }] },
