@@ -23,6 +23,8 @@ export const setupMenuMobile = (collectionElementsByClass: HTMLCollectionOf<Elem
 
          // Handle filter
          if (el.classList.contains('handle-filter')) {
+            // Chặn cuộn trên body
+            toggleClassList(document.body, ['overflow-hidden', 'sm:overflow-auto']);
             toggleClassList(document.getElementById('bg-filter'), ['opacity-0', 'opacity-50', 'invisible']);
             toggleClassList(document.getElementById('filter'), [
                'invisible',
